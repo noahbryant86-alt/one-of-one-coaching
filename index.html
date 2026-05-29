@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ADAPT Elite</title>
+<title>One to One Coaching</title>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
@@ -28,7 +28,7 @@ body{background:var(--ink);color:var(--paper);font-family:'DM Sans',sans-serif;f
 /* AUTH */
 #auth-wrap{display:none;min-height:100vh;align-items:center;justify-content:center;padding:20px;}
 .auth-card{width:100%;max-width:400px;}
-.auth-mark{font-family:'Cormorant Garamond',serif;font-size:48px;color:var(--gold);font-weight:300;letter-spacing:0.05em;margin-bottom:4px;}
+.auth-mark{font-family:'Cormorant Garamond',serif;font-size:64px;color:var(--gold);font-weight:300;letter-spacing:0.1em;margin-bottom:4px;}
 .auth-title{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.5em;text-transform:uppercase;color:var(--muted);margin-bottom:40px;}
 .auth-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.4em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;display:block;}
 .auth-input{width:100%;background:transparent;border:none;border-bottom:1px solid var(--dim);color:var(--paper);font-family:'DM Sans',sans-serif;font-size:15px;font-weight:300;padding:12px 0;outline:none;transition:border-color 0.3s;margin-bottom:20px;display:block;}
@@ -56,9 +56,9 @@ nav{height:56px;border-bottom:1px solid var(--dim);display:flex;align-items:cent
 .wrap{max-width:640px;margin:0 auto;padding:36px 20px 100px;}
 
 /* VISION CARD */
-.vision-card{margin-bottom:32px;padding:28px;border:1px solid var(--dim);position:relative;}
+.vision-card{margin-bottom:32px;padding:28px;border:1px solid var(--gold);position:relative;}
 .vc-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.5em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
-.vc-vision{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:var(--paper);line-height:1.4;margin-bottom:8px;}
+.vc-vision{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--paper);line-height:1.3;margin-bottom:10px;}
 .vc-why{font-size:13px;color:var(--text);line-height:1.8;font-style:italic;}
 .vc-edit{position:absolute;top:20px;right:20px;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.3em;text-transform:uppercase;color:var(--dim);cursor:pointer;text-decoration:underline;}
 .vc-edit:hover{color:var(--gold);}
@@ -211,15 +211,15 @@ nav{height:56px;border-bottom:1px solid var(--dim);display:flex;align-items:cent
 <body>
 
 <div id="ls">
-  <div class="ls-mark">AE</div>
-  <div class="ls-sub">ADAPT Elite</div>
+  <div class="ls-mark">1:1</div>
+  <div class="ls-sub">One to One Coaching</div>
 </div>
 
 <!-- AUTH -->
 <div id="auth-wrap" style="display:none;min-height:100vh;align-items:center;justify-content:center;padding:20px;">
   <div class="auth-card">
-    <div class="auth-mark">ADAPT</div>
-    <div class="auth-title">Elite · One to One Coaching</div>
+    <div class="auth-mark">1:1</div>
+    <div class="auth-title">One to One Coaching</div>
 
     <div id="auth-member-form">
       <label class="auth-label">Email Address</label>
@@ -240,8 +240,8 @@ nav{height:56px;border-bottom:1px solid var(--dim);display:flex;align-items:cent
 <!-- COACH AUTH OVERLAY -->
 <div id="coach-auth" style="display:none;position:fixed;inset:0;background:rgba(8,8,15,0.95);z-index:200;align-items:center;justify-content:center;padding:20px;">
   <div class="auth-card">
-    <div class="auth-mark">Coach</div>
-    <div class="auth-title">ADAPT Elite · Coach Access</div>
+    <div class="auth-mark">1:1</div>
+    <div class="auth-title">One to One Coaching · Coach Access</div>
     <label class="auth-label">Coach Email</label>
     <input class="auth-input" id="c-email" type="email" placeholder="coach@email.com"/>
     <label class="auth-label">Password</label>
@@ -255,7 +255,7 @@ nav{height:56px;border-bottom:1px solid var(--dim);display:flex;align-items:cent
 <!-- MEMBER APP -->
 <div id="app">
   <nav>
-    <div class="nav-mark">ADAPT</div>
+    <div class="nav-mark">1:1</div>
     <div class="nav-right">
       <div class="nav-tab active" id="tab-today" onclick="showView('today')">Today</div>
       <div class="nav-tab" id="tab-progress" onclick="showView('progress')">Progress</div>
@@ -289,21 +289,12 @@ nav{height:56px;border-bottom:1px solid var(--dim);display:flex;align-items:cent
       <!-- DAILY CONTENT -->
       <div id="daily-content" style="display:none">
 
-        <!-- IDENTITY -->
-        <div class="identity-box">
-          <div class="section-label">Identity</div>
-          <div class="ib-question">Who am I being today?</div>
-          <textarea class="ib-input" id="f-being" placeholder="I am someone who..." rows="3"></textarea>
-        </div>
-
-        <div class="divider"></div>
-
         <!-- DAILY MISSIONS -->
         <div class="missions-box">
-          <div class="section-label">Daily Missions</div>
+          <div class="section-label">Who am I being today</div>
           <div class="mb-header">
-            <div class="mb-title">What I am doing today</div>
-            <button class="mb-add" onclick="addMission()">+ Add Mission</button>
+            <div class="mb-title">Set your intentions and missions</div>
+            <button class="mb-add" onclick="addMission()">+ Add</button>
           </div>
           <div id="missions-list"></div>
         </div>
@@ -312,7 +303,7 @@ nav{height:56px;border-bottom:1px solid var(--dim);display:flex;align-items:cent
 
         <!-- EVENING REFLECTION -->
         <div class="reflection-title">Evening Reflection</div>
-        <div class="reflection-sub">End of day. Be honest. Three minutes is enough.</div>
+        <div class="reflection-sub">End of day. Be honest.</div>
 
         <div class="ref-grid">
           <div class="ref-box">
@@ -366,7 +357,7 @@ nav{height:56px;border-bottom:1px solid var(--dim);display:flex;align-items:cent
 <!-- COACH APP -->
 <div id="coach-app">
   <nav>
-    <div class="nav-mark">ADAPT · Coach</div>
+    <div class="nav-mark">One to One · Coach</div>
     <div class="nav-right">
       <button class="nav-so" onclick="doSignOut()">Sign Out</button>
     </div>
@@ -430,7 +421,7 @@ function doSignIn(){
   if(!e||!p){document.getElementById('auth-err').textContent='Please fill in all fields.';return;}
   if(isSignUp){
     auth.createUserWithEmailAndPassword(e,p).then(function(c){
-      db.ref('ae_members/'+c.user.uid).set({email:e,joinedAt:Date.now()});
+      db.ref('oto_members/'+c.user.uid).set({email:e,joinedAt:Date.now()});
     }).catch(function(err){
       document.getElementById('auth-err').textContent=err.code==='auth/email-already-in-use'?'Account exists — sign in instead.':err.message;
     });
@@ -453,7 +444,7 @@ function doCoachSignIn(){
 function doSignOut(){auth.signOut();}
 
 function loadUser(){
-  db.ref('ae_members/'+me.uid).once('value').then(function(snap){
+  db.ref('oto_members/'+me.uid).once('value').then(function(snap){
     myData=snap.val()||{};
     if(myData.vision){
       showVisionDisplay();
@@ -470,7 +461,7 @@ function saveVision(){
   var v=document.getElementById('vs-vision').value.trim();
   var w=document.getElementById('vs-why').value.trim();
   if(!v||!w){showToast('Please fill in both fields.');return;}
-  db.ref('ae_members/'+me.uid).update({vision:v,why:w});
+  db.ref('oto_members/'+me.uid).update({vision:v,why:w});
   myData.vision=v; myData.why=w;
   showVisionDisplay();
 }
@@ -534,11 +525,11 @@ function toggleComplete(){
 
 // SUBMIT
 async function submitReflection(){
-  var being=document.getElementById('f-being').value.trim();
+  var being='';
   var well=document.getElementById('f-well').value.trim();
   var learned=document.getElementById('f-learned').value.trim();
   var better=document.getElementById('f-better').value.trim();
-  if(!being||!well||!learned||!better){showToast('Please fill in all reflection fields.');return;}
+  if(!well||!learned||!better){showToast('Please fill in all reflection fields.');return;}
   if(!score){showToast('Please score your day out of 10.');return;}
 
   var btn=document.getElementById('submit-btn');
@@ -574,7 +565,7 @@ async function submitReflection(){
       aiReflection:data.reflection,
       createdAt:Date.now()
     };
-    db.ref('ae_reflections/'+me.uid).push(entry);
+    db.ref('oto_reflections/'+me.uid).push(entry);
     document.getElementById('ai-saved').classList.add('show');
 
   } catch(e){
@@ -586,7 +577,7 @@ async function submitReflection(){
 
 // PROGRESS
 function loadProgress(){
-  db.ref('ae_reflections/'+me.uid).orderByChild('createdAt').limitToLast(60).once('value').then(function(snap){
+  db.ref('oto_reflections/'+me.uid).orderByChild('createdAt').limitToLast(60).once('value').then(function(snap){
     var entries=[];
     snap.forEach(function(c){entries.push(Object.assign({key:c.key},c.val()));});
     entries.reverse();
@@ -630,13 +621,13 @@ function showView(view){
 
 // COACH DASHBOARD
 function loadCoachDashboard(){
-  db.ref('ae_reflections').once('value').then(function(snap){
+  db.ref('oto_reflections').once('value').then(function(snap){
     var byUser={};
     snap.forEach(function(uSnap){
       var uid=uSnap.key; byUser[uid]=[];
       uSnap.forEach(function(e){byUser[uid].push(Object.assign({key:e.key},e.val()));});
     });
-    db.ref('ae_members').once('value').then(function(mSnap){
+    db.ref('oto_members').once('value').then(function(mSnap){
       var members={};
       mSnap.forEach(function(m){members[m.key]=m.val();});
       if(!Object.keys(byUser).length){
